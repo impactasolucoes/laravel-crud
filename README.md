@@ -1,6 +1,6 @@
 # Laravel CRUD
 
-Laravel CRUD Tools
+Laravel CRUD Tools v2
 
 - :link: - [01 - Instalação](https://github.com/impactaweb/laravel-crud/wiki/01.-Instala%C3%A7%C3%A3o)
 - :link: - [02 - Criando um CRUD completo](https://github.com/impactaweb/laravel-crud/wiki/02.-Como-criar-um-crud-completo)
