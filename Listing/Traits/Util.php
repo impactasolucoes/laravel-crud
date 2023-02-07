@@ -1,10 +1,11 @@
 <?php
 
-namespace Impactaweb\Crud\Listing\Traits;
+namespace Impactasolucoes\Crud\Listing\Traits;
 
 use Illuminate\Support\Facades\Storage;
 
-trait Util {
+trait Util
+{
 
     public static function fillUrlParameters(string $url, $data = []): string
     {
@@ -21,7 +22,7 @@ trait Util {
         }
 
         foreach ($parameters[0] as $parameter) {
-            $parameter2 = str_replace(['{','}'], '', $parameter);
+            $parameter2 = str_replace(['{', '}'], '', $parameter);
 
             if (substr($parameter2, 0, 10) == 'storageUrl') {
                 if (substr($parameter2, 10, 1) == '.') {
@@ -40,14 +41,12 @@ trait Util {
                 $url = str_replace($parameter, $routeParams[$parameter2] ?? "", $url);
                 continue;
             }
-            
+
             if (array_key_exists($parameter2, $data)) {
                 $url = str_replace($parameter, $data[$parameter2] ?? "", $url);
             }
-
         }
 
         return $url;
     }
-
 }

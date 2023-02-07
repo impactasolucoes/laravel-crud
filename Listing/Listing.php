@@ -1,17 +1,18 @@
 <?php
 
-namespace Impactaweb\Crud\Listing;
+namespace Impactasolucoes\Crud\Listing;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use Impactaweb\Crud\Listing\DataSource;
-use Impactaweb\Crud\Listing\Field;
-use Impactaweb\Crud\Listing\FieldCollection;
-use Impactaweb\Crud\Listing\Action;
-use Impactaweb\Crud\Listing\Traits\FieldTypes;
-use Impactaweb\Crud\Listing\Traits\Util;
+use Impactasolucoes\Crud\Listing\DataSource;
+use Impactasolucoes\Crud\Listing\Field;
+use Impactasolucoes\Crud\Listing\FieldCollection;
+use Impactasolucoes\Crud\Listing\Action;
+use Impactasolucoes\Crud\Listing\Traits\FieldTypes;
+use Impactasolucoes\Crud\Listing\Traits\Util;
 use Psy\Util\Str;
 
-class Listing {
+class Listing
+{
 
     use FieldTypes;
     use Util;
@@ -219,9 +220,11 @@ class Listing {
     {
         foreach ($this->actions as $action) {
             $url = $action->getUrl();
-            if ($action->getMethod() != 'GET'
+            if (
+                $action->getMethod() != 'GET'
                 || strpos($url, '{id}') !== false
-                || strpos($url, '{ids}') !== false) {
+                || strpos($url, '{ids}') !== false
+            ) {
                 return true;
             }
         }
@@ -257,7 +260,7 @@ class Listing {
      */
     public function action(string $label, ?string $url = null, ?string $icon = null, ?string $method = null, ?string $message = null): void
     {
-        $name = preg_replace("/[^a-z]/",'',strtolower($label));
+        $name = preg_replace("/[^a-z]/", '', strtolower($label));
         $this->actions[$name] = new Action($name, $label, $method ?? 'GET', $url, $icon, $message);
     }
 
@@ -306,5 +309,4 @@ class Listing {
     {
         $this->keepQueryStrings = $fields;
     }
-
 }

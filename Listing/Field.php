@@ -1,11 +1,12 @@
 <?php
 
-namespace Impactaweb\Crud\Listing;
+namespace Impactasolucoes\Crud\Listing;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class Field {
+class Field
+{
 
     public $type;
     public $name;
@@ -101,7 +102,7 @@ class Field {
 
             $fullUrl = "?" . Arr::query($query);
 
-            return '<a href="' . $fullUrl . '"'.$className.'>' . $this->getLabel() . '</a>';
+            return '<a href="' . $fullUrl . '"' . $className . '>' . $this->getLabel() . '</a>';
         }
 
         return $this->getLabel();

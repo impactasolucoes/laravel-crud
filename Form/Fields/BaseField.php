@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Fields;
+namespace Impactasolucoes\Crud\Form\Fields;
 
 use Exception;
 use Illuminate\Contracts\View\Factory;

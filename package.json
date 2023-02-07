@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "javascript components using in laravel-crud package",
   "main": "index.js",
-  "repository": "https://github.com/impactaweb/laravel-crud.git",
+  "repository": "git@github.com:impactasolucoes/laravel-crud.git",
   "author": "antunesgabriel <gabrielantunescontato@gmail.com>",
   "license": "MIT",
   "private": true,

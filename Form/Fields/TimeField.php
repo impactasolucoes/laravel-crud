@@ -1,11 +1,11 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Fields;
+namespace Impactasolucoes\Crud\Form\Fields;
 
 use Exception;
 
-class TimeField extends BaseField {
+class TimeField extends BaseField
+{
 
     protected $col = '3';
-
 }

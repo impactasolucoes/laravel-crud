@@ -1,11 +1,12 @@
 <?php
 
-namespace Impactaweb\Crud\Listing;
+namespace Impactasolucoes\Crud\Listing;
 
 use Illuminate\Support\Facades\Route;
 
-class Action {
-    
+class Action
+{
+
     public $name;
     public $label;
     public $method;
@@ -21,7 +22,7 @@ class Action {
         $this->method = in_array(strtoupper($method), ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']) ? strtoupper($method) : 'GET';
         $this->icon = $icon;
         $this->message = $message;
-        
+
         // load Resource Verbs
         $this->resourceCustomVerbs = Route::resourceVerbs();
 
@@ -110,5 +111,4 @@ class Action {
         $customVerbsFlip = array_flip($this->resourceCustomVerbs);
         return $customVerbsFlip[$actionName] ?? $actionName;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Form;
+namespace Impactasolucoes\Crud\Form;
 
 /**
  * Class AliasCampos
@@ -33,5 +33,4 @@ class FieldAlias
         'search' => Fields\SearchField::class,
         'select2' => Fields\Select2Field::class,
     ];
-
 }

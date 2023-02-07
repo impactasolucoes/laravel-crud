@@ -1,9 +1,8 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Fields;
+namespace Impactasolucoes\Crud\Form\Fields;
 
 class HtmlField extends BaseField
 {
     protected $content = '';
-
 }

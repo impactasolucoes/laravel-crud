@@ -1,11 +1,12 @@
 <?php
 
-namespace Impactaweb\Crud\Listing\Traits;
+namespace Impactasolucoes\Crud\Listing\Traits;
 
 use Illuminate\Support\Facades\Storage;
-use Impactaweb\Crud\Listing\Listing;
+use Impactasolucoes\Crud\Listing\Listing;
 
-trait FieldTypes {
+trait FieldTypes
+{
 
     /**
      * Cria um campo customizado via callback na listagem.
@@ -22,9 +23,9 @@ trait FieldTypes {
         if (!$name) {
             // Criando um nome aleatório para o campo
             $name = 'customfield.'
-                . substr(strtolower(preg_replace("/[^A-Za-z0-9?!]/",'', $label)), 0, 20)
+                . substr(strtolower(preg_replace("/[^A-Za-z0-9?!]/", '', $label)), 0, 20)
                 . '_'
-                . substr(md5(uniqid()),0,10);
+                . substr(md5(uniqid()), 0, 10);
         }
 
         $options['callback'] = $callbackFunction;
@@ -42,7 +43,7 @@ trait FieldTypes {
      */
     public function link(string $linkName, string $urlWithParameters, array $options = null)
     {
-        $callback = function($data) use ($linkName, $urlWithParameters, $options) {
+        $callback = function ($data) use ($linkName, $urlWithParameters, $options) {
             $linkClass = $options['class'] ?? '';
 
             // Target _blank é o padrão
@@ -80,7 +81,7 @@ trait FieldTypes {
      */
     public function image(string $label, string $imageUrlWithParameters, int $maxWidth = 50, int $maxHeight = 50)
     {
-        $callback = function($data) use ($imageUrlWithParameters, $maxWidth, $maxHeight) {
+        $callback = function ($data) use ($imageUrlWithParameters, $maxWidth, $maxHeight) {
             $url = Listing::fillUrlParameters($imageUrlWithParameters, $data);
             $maxWidthStyle = ($maxWidth > 0 ? ";max-width:" . $maxWidth . "px" : "");
             $maxHeightStyle = ($maxHeight > 0 ? ";max-height:" . $maxHeight . "px" : "");
@@ -101,7 +102,7 @@ trait FieldTypes {
      */
     public function blade(string $label, string $bladeViewPath, array $aditionalParameters = [])
     {
-        $callback = function($data) use ($label, $bladeViewPath, $aditionalParameters) {
+        $callback = function ($data) use ($label, $bladeViewPath, $aditionalParameters) {
             return view($bladeViewPath, compact('data', 'label', 'aditionalParameters'));
         };
 
@@ -119,8 +120,8 @@ trait FieldTypes {
      */
     public function flag(string $name, string $label, $hasFlagLink = false)
     {
-        $callback = function($data) use ($name, $hasFlagLink) {
-            if(is_null($data->$name) && $hasFlagLink) {
+        $callback = function ($data) use ($name, $hasFlagLink) {
+            if (is_null($data->$name) && $hasFlagLink) {
                 return "
                     <a href='javascript:;' data-double-flag='off' class='flagItem flag-off' data-field='{$name}' title='Desativar' style='margin-right: 4px'>0</a>
                     <a href='javascript:;' data-double-flag='on' class='flagItem flag-on' data-field='{$name}' title='Ativar'>1</a>
@@ -133,16 +134,16 @@ trait FieldTypes {
 
             if ($hasFlagLink) {
                 return '<a href="javascript:;" class="flagItem '
-                        . ($data->$name == 1 ? 'flag-on' : 'flag-off')
-                        .' " data-field="' . $name . '">'
-                        . $data->$name
-                        . '</a>';
+                    . ($data->$name == 1 ? 'flag-on' : 'flag-off')
+                    . ' " data-field="' . $name . '">'
+                    . $data->$name
+                    . '</a>';
             } else {
                 return '<span class="flagItem '
-                        . ($data->$name == 1 ? 'flag-on' : 'flag-off')
-                        . '">'
-                        . $data->$name
-                        . '</span>';
+                    . ($data->$name == 1 ? 'flag-on' : 'flag-off')
+                    . '">'
+                    . $data->$name
+                    . '</span>';
             }
         };
 
@@ -192,7 +193,7 @@ trait FieldTypes {
             $baseUrl = Storage::url("");
         }
 
-        $callback = function($data) use ($name, $label, $baseUrl, $urlWithParameters, $options) {
+        $callback = function ($data) use ($name, $label, $baseUrl, $urlWithParameters, $options) {
             if (!$data->$name ?? false) {
                 return "";
             }
@@ -239,5 +240,4 @@ trait FieldTypes {
     {
         return $this->field($name, $label, $options, 'date');
     }
-
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Impactaweb\Crud\Commands;
+namespace Impactasolucoes\Crud\Commands;
 
-use Impactaweb\Crud\Form\Generators\FormGenerator;
+use Impactasolucoes\Crud\Form\Generators\FormGenerator;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputArgument;
@@ -58,7 +58,7 @@ class CrudForm extends GeneratorCommand
 
         $fields = $formBuider->gerarCampos();
         $stub = str_replace('{{ myFields }}', $fields, $stub);
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         return str_replace('DummyClass', $class, $stub);
     }

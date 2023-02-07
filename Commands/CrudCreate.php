@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Commands;
+namespace Impactasolucoes\Crud\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
@@ -65,14 +65,12 @@ class CrudCreate extends Command
             }
 
             $this->createForm($name, $folder, $modelnamespace);
-
         } catch (Exception $exception) {
             $this->error('OPSS!: ' . $exception->getMessage());
         }
-
     }
 
-    private function createRequest(string $name,string $folder, string $modelnamespace): void
+    private function createRequest(string $name, string $folder, string $modelnamespace): void
     {
         $this->line('Criando Custom Request...');
 
@@ -83,7 +81,7 @@ class CrudCreate extends Command
         ]);
     }
 
-    private function createForm(string $name,string $folder, string $modelnamespace): void
+    private function createForm(string $name, string $folder, string $modelnamespace): void
     {
         $this->line('Criando Formulario...');
 
@@ -94,7 +92,7 @@ class CrudCreate extends Command
         ]);
     }
 
-    private function createController(string $name,string $folder, string $modelnamespace): void
+    private function createController(string $name, string $folder, string $modelnamespace): void
     {
         $this->line('Criando Custom Controller...');
 
