@@ -12,7 +12,7 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "impactasolucoes\\Crud\\": "."
+      "Impactasolucoes\\Crud\\": "."
     }
   },
   "require": {
@@ -22,7 +22,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "impactasolucoes\\Crud\\CrudServiceProvider"
+        "Impactasolucoes\\Crud\\CrudServiceProvider"
       ]
     }
   },
