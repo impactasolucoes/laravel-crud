@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Impactaweb\Crud\Form\Traits;
+namespace Impactasolucoes\Crud\Form\Traits;
 
 trait Fields
 {
@@ -220,6 +220,4 @@ trait Fields
     {
         return $this->field('search', $name, $label, ['url' => $url, 'search' => $search]);
     }
-
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Form;
+namespace Impactasolucoes\Crud\Form;
 
 /**
  * Class Panel
@@ -49,5 +49,4 @@ class Panel
     {
         return $this->id;
     }
-
 }

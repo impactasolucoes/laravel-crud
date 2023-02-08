@@ -1,13 +1,14 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Generators;
+namespace Impactasolucoes\Crud\Form\Generators;
 
 /**
  * Class CampoBuilder
  * Classe utiliada para criação de CAMPOS de formulário automaticamente
  * @package App\Lib\Formulario
  */
-class FieldGenerator {
+class FieldGenerator
+{
 
     /**
      * Tipo do campo (AliasCampos.php)
@@ -45,8 +46,7 @@ class FieldGenerator {
     public function montarCampo()
     {
         $camposString = [];
-        foreach ($this->arrayCampo as $ind => $valor)
-        {
+        foreach ($this->arrayCampo as $ind => $valor) {
             if (getType($valor) == 'array') {
                 $camposString[] = "'{$ind}' => [],";
             } else {
@@ -56,5 +56,4 @@ class FieldGenerator {
         $camposString = implode("", $camposString);
         return sprintf($this->template, $this->tipoCampo, $this->idCampo, $this->labelCampo, $camposString);
     }
-
 }

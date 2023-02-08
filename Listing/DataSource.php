@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Listing;
+namespace Impactasolucoes\Crud\Listing;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,9 +50,13 @@ class DataSource
     /**
      * Retorna o Colletion da query
      */
-    public function getData(array $columns, ?array $orderby = [], int $perPagePagination = 20, ?array $queryString = [],
-                            ?array $alias = [])
-    {
+    public function getData(
+        array $columns,
+        ?array $orderby = [],
+        int $perPagePagination = 20,
+        ?array $queryString = [],
+        ?array $alias = []
+    ) {
         $this->columns = $columns;
         $this->buildJoins();
         $this->buildWhere($queryString);
@@ -129,7 +133,6 @@ class DataSource
                             $qualifiedFK[] = $scope[1];
                         }
                     }
-
                 }
                 $joinList[] = [$tableName, $qualifiedPK, '=', $qualifiedFK];
                 $joinTables[] = $fullTableName;
@@ -140,7 +143,6 @@ class DataSource
                 $qualifiedColumn = ($join ? $join->getRelated()->getTable() : $this->table) . "." . end($columnParts);
                 $this->columnsSelect[$column] = $qualifiedColumn;
             }
-
         }
 
         // Performing joins to data source
@@ -354,7 +356,5 @@ class DataSource
             }
         }
         return $textParts;
-
     }
-
 }

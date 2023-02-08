@@ -1,12 +1,13 @@
 <?php
 
-namespace Impactaweb\Crud\Listing;
+namespace Impactasolucoes\Crud\Listing;
 
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
-class FieldCollection implements Countable, IteratorAggregate {
+class FieldCollection implements Countable, IteratorAggregate
+{
     public $fields = [];
     public $fieldsToShow = [];
     public $fieldsName = [];
@@ -62,5 +63,4 @@ class FieldCollection implements Countable, IteratorAggregate {
         }
         return $fields;
     }
-
 }

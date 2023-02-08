@@ -1,8 +1,7 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Fields;
+namespace Impactasolucoes\Crud\Form\Fields;
 
 class SearchField extends BaseField
 {
-
 }

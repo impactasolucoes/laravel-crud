@@ -1,8 +1,7 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Fields;
+namespace Impactasolucoes\Crud\Form\Fields;
 
 class Select2Field extends BaseField
 {
-
 }

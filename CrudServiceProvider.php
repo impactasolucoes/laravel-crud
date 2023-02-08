@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud;
+namespace Impactasolucoes\Crud;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -55,7 +55,7 @@ class CrudServiceProvider extends LaravelServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/Form/Resources/assets' => public_path('vendor/impactaweb/crud/form'),
+            __DIR__.'/Form/Resources/assets' => public_path('vendor/Impactasolucoes/crud/form'),
         ], 'public');
 
     }
@@ -82,7 +82,7 @@ class CrudServiceProvider extends LaravelServiceProvider
 
         // Publish Views
         $this->publishes([
-            __DIR__.'/Listing/Resources/views' => resource_path('views/vendor/impactaweb/crud/listing'),
+            __DIR__.'/Listing/Resources/views' => resource_path('views/vendor/Impactasolucoes/crud/listing'),
         ], 'views');
     }
 

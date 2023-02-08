@@ -1,5 +1,6 @@
 <?php
-namespace Impactaweb\Crud\Form\Fields;
+
+namespace Impactasolucoes\Crud\Form\Fields;
 
 use Exception;
 
@@ -20,5 +21,4 @@ class DateTimeField extends BaseField
         $this->formatServer = (string) config('form.fields.dateTime.formatServer', 'YYYY-MM-DD hh:mm:ss');
         parent::__construct($id, $label, $options, $type);
     }
-
 }

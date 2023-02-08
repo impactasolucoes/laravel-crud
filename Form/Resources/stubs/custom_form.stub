@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Impactaweb\Crud\Form\Form;
+use Impactasolucoes\Crud\Form\Form;
 
 class DummyClass extends Form
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Commands;
+namespace Impactasolucoes\Crud\Commands;
 
 use Exception;
 use Illuminate\Console\GeneratorCommand;
@@ -67,7 +67,7 @@ class CrudCustomRequest extends GeneratorCommand
 
         $stub = str_replace('{{ myRules }}', $newFields, $stub);
 
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         return str_replace('DummyClass', $class, $stub);
     }
@@ -90,7 +90,7 @@ class CrudCustomRequest extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Requests';
+        return $rootNamespace . '\Http\Requests';
     }
 
     /**
@@ -115,12 +115,12 @@ class CrudCustomRequest extends GeneratorCommand
     {
         preg_match('/^varchar\((\d+)\)$/', $field->Type, $output);
 
-        if(!empty($output)) {
+        if (!empty($output)) {
             $max = "max:{$output[1]}";
             return "'required', '{$max}'";
         }
 
-        if($field->Type === 'date' || $field->Type === 'timestamp') {
+        if ($field->Type === 'date' || $field->Type === 'timestamp') {
             return "'required', 'date_format:FORMATO'";
         }
         return "'required'";

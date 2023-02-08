@@ -1,12 +1,12 @@
 <?php
 
-namespace Impactaweb\Crud\Form;
+namespace Impactasolucoes\Crud\Form;
 
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Impactaweb\Crud\Form\Traits\Fields;
+use Impactasolucoes\Crud\Form\Traits\Fields;
 
 /**
  * Class Form

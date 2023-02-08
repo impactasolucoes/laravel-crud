@@ -42,11 +42,10 @@ return [
      * Available Mask's
      */
     'masks' => [
-        'dm' => '\Impactaweb\Crud\Listing\Mask\Dates::dm',
-        'dmY' => '\Impactaweb\Crud\Listing\Mask\Dates::dmY',
-        'dmYHi' => '\Impactaweb\Crud\Listing\Mask\Dates::dmYHi',
-        'dmYHis' => '\Impactaweb\Crud\Listing\Mask\Dates::dmYHis',
+        'dm' => '\Impactasolucoes\Crud\Listing\Mask\Dates::dm',
+        'dmY' => '\Impactasolucoes\Crud\Listing\Mask\Dates::dmY',
+        'dmYHi' => '\Impactasolucoes\Crud\Listing\Mask\Dates::dmYHi',
+        'dmYHis' => '\Impactasolucoes\Crud\Listing\Mask\Dates::dmYHis',
     ],
 
 ];
-

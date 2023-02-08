@@ -1,6 +1,6 @@
 <?php
 
-namespace Impactaweb\Crud\Form\Generators;
+namespace Impactasolucoes\Crud\Form\Generators;
 
 class FormGenerator
 {
@@ -80,7 +80,6 @@ class FormGenerator
         $campoObj->labelCampo = $this->identificaNomeCampo($campo);
 
         return $campoObj->montarCampo();
-
     }
 
     /**
@@ -100,14 +99,12 @@ class FormGenerator
             return 'flag';
         }
 
-        foreach ($this->camposSql as $tipoSql => $tipoPS)
-        {
+        foreach ($this->camposSql as $tipoSql => $tipoPS) {
             if (substr($campo->Type, 0, strlen($tipoSql)) === $tipoSql) {
                 return $tipoPS;
             }
         }
         return 'texto';
-
     }
 
     /**
@@ -126,5 +123,4 @@ class FormGenerator
         $nomeCampo = str_replace('_', ' ', $nomeCampo);
         return ucfirst($nomeCampo);
     }
-
 }
