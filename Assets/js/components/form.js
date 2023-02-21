@@ -9,7 +9,7 @@ window.jQuery(document).ready(function() {
 
   if (!$("[data-its-form]").length) return;
 
-  $('[data-toggle="tooltip"]').tooltip();
+  // $('[data-toggle="tooltip"]').tooltip();
 
   const $deleteFiles = $("[data-destroy]");
 

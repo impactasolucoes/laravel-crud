@@ -1,3 +1,12 @@
+// dependências
+window.$ = window.jQuery = require('jquery');
+
+require('jquery-ui');
+require('jquery-validation');
+require("jquery.checkboxes");
+require("select2");
+// require("summernote");
+
 // customs
 require("./js/customs/jqueryExtends");
 require("./js/customs/loadEditor");

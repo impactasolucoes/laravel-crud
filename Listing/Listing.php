@@ -202,9 +202,9 @@ class Listing
      */
     public function getPerPagePagination(): int
     {
-        $perPagePagination = request()->get('pp') ?? $this->perPagePagination;
+        $perPagePagination = request()->get('pp');
         if (!is_numeric($perPagePagination) || !($perPagePagination > 0)) {
-            $perPagePagination = config('listing.defaultPerPage');
+            $perPagePagination = config('listing.defaultPerPage', $this->perPagePagination);
         }
 
         return $perPagePagination;

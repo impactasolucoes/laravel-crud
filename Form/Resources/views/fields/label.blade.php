@@ -1,4 +1,4 @@
-<label class="col-sm-3 col-form-label font-weight-bold" for="c-{{ $id }}">
+<label class="col-sm-3 col-form-label font-weight-bold fw-bold" for="c-{{ $id }}">
     @if ($required)
         <span class="text-danger">*</span>
     @endif

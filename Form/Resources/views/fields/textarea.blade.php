@@ -1,4 +1,4 @@
-<div class="form-group row align-items-flexstart">
+<div class="mb-3 row align-items-flexstart">
 
     @include('form::fields.label')
 

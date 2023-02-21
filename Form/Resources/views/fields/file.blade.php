@@ -1,4 +1,4 @@
-<div class="form-group row align-items-baseline">
+<div class="mb-3 row align-items-baseline">
     @include('form::fields.label')
     <div class="@if($col >= '10') col @else col-md-{{$col}} @endif">
         <input

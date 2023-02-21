@@ -1,4 +1,4 @@
-<div class="form-group row align-items-center">
+<div class="row align-items-center mb-3">
 
     @include('form::fields.label')
 

@@ -1,4 +1,4 @@
-<div class="modal fade show" id="modalBuscaAvancada" tabindex="-1" role="dialog" aria-labelledby="modalBuscaAvancadaLabel" aria-modal="true">
+<div class="modal fade" id="modalBuscaAvancada" tabindex="-1" role="dialog" aria-labelledby="modalBuscaAvancadaLabel" aria-modal="true" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <form method="get" class="frmBuscaAvancada" id="formBuscaAvacada">

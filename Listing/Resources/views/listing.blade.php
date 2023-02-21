@@ -9,18 +9,19 @@
                 @foreach ($actions as $action)
                     <button
                         type="button"
-                        class="btn btn-lg btn-default tooltips actionButton"
+                        class="btn btn-lg btn-secondary tooltips actionButton"
                         data-name="{{ $action->getName() }}"
                         data-url="{{ $action->getUrl() }}"
                         data-verb="{{ $action->getVerb() }}"
                         data-method="{{ $action->getMethod() }}"
                         title="{{ strip_tags($action->getLabel()) }}"
                         data-confirmation="{{ $action->getConfirmationText() }}"
-                        data-toggle="tooltip" data-placement="top"
+                        data-toggle="tooltip"
+                        data-placement="top"
                     >
                         @if($action->getIcon())
                             <i class="{{ $action->getIcon() }}"></i>
-                            <span class="sr-only">
+                            <span>
                                 {{ $action->getLabel() }}
                             </span>
                         @else

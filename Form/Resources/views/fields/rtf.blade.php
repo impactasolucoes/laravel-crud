@@ -1,4 +1,4 @@
-<div class="form-group" @if ($label) data-rtf="{{ $label }}" @endif>
+<div class="mb-3" @if ($label) data-rtf="{{ $label }}" @endif>
     @if ($label)
         <label class="col-sm-3 col-form-label font-weight-bold px-0" for="c-{{ $id }}">
             @if ($required)

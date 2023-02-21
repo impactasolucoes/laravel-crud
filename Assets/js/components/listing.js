@@ -255,15 +255,15 @@ $(document).ready(function() {
     $item.checked = false;
   });
 
-  // Atilet tooltip para todos os actions
-  if (
-    !(
-      $('[data-toggle="tooltip"]:first').data &&
-      $('[data-toggle="tooltip"]:first').data("bs.tooltip")
-    )
-  ) {
-    $('[data-toggle="tooltip"]').tooltip();
-  }
+  // // Atilet tooltip para todos os actions
+  // if (
+  //   !(
+  //     $('[data-toggle="tooltip"]:first').data &&
+  //     $('[data-toggle="tooltip"]:first').data("bs.tooltip")
+  //   )
+  // ) {
+  //   $('[data-toggle="tooltip"]').tooltip();
+  // }
 
   $("#listingForm th order-asc").addClass("fas fa-sort-up");
   $("#listingForm th order-desc").addClass("fas fa-sort-down");

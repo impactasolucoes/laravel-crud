@@ -34,6 +34,8 @@
                             class="btn btn-lg btn-default dropdown-toggle border"
                             data-toggle="modal"
                             data-target="#modalBuscaAvancada"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalBuscaAvancada"
                         ></button>
                     </div>
                 </div>

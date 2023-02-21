@@ -12,27 +12,27 @@ return [
      * Paginação: quantidade padrão de itens por página:
      * <Int>
      */
-    'defaultPerPage' => 10,
+    'defaultPerPage' => 20,
 
     /**
      * Ações padrão da listagem:
      */
     'defaultActions' => [
         [
-            'name' => 'criar',
-            'label' => 'Novo',
+            'name' => 'create',
+            'label' => 'New',
             'method' => 'GET',
             'icon' => 'far fa-plus-square'
         ],
         [
-            'name' => 'editar',
-            'label' => 'Editar',
+            'name' => 'edit',
+            'label' => 'Edit',
             'method' => 'GET',
             'icon' => 'far fa-edit'
         ],
         [
             'name' => 'destroy',
-            'label' => 'Excluir',
+            'label' => 'Delete',
             'method' => 'DELETE',
             'icon' => 'far fa-trash-alt'
         ],
