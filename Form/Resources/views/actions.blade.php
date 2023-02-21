@@ -41,3 +41,5 @@
 
     </div>
 </div>
+
+<BR><BR><a href="?eav=1&redir={{ urlencode(url()->current()) }}">Customizar form</a>

@@ -37,6 +37,7 @@ class Form
     public $cancelVisible = true;
     public $cancelLinkUrl = '#';
     public $ajax = true;
+    public $entityName;
 
 
     /**
@@ -64,8 +65,6 @@ class Form
         }
 
         $this->buildPrimaryKeyValue();
-
-        return $this;
     }
 
     /**
@@ -336,5 +335,10 @@ class Form
     public function disableAjax()
     {
         $this->ajax = false;
+    }
+
+    public function setEntityName(string $entityName): void
+    {
+        $this->entityName = $entityName;
     }
 }
