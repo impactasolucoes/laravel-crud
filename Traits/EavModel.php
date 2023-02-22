@@ -1,20 +1,28 @@
 <?php
 
-
 namespace Impactasolucoes\Crud\Traits;
 
-use Impactasolucoes\Crud\Models\CrudEavValue;
+use Impactasolucoes\Crud\Models\CrudEavValues;
 
 trait EavModel
 {
+    public $crudName;
 
-    /**
-     * Get all of the post's comments.
-     */
-    public function crud_eav_values()
+    public static function withEavValues(string $crudName)
     {
-        return $this->morphMany(CrudEavValue::class, 'crud_eav_values', 'entity_name', 'entity_id');
+        return (new self)->with(['crud_eav_values' => function($query) use ($crudName){
+            $query->where('crud_name', $crudName);
+        }]);
     }
 
+    public function crud_eav_values()
+    {
+        return $this->hasMany(CrudEavValues::class, 'entity_id', 'id');
+    }
+
+    public function crudEavAttribute()
+    {
+        return 'x';
+    }
 
 }

@@ -37,7 +37,7 @@ class Form
     public $cancelVisible = true;
     public $cancelLinkUrl = '#';
     public $ajax = true;
-    public $entityName;
+    public $crudName;
 
 
     /**
@@ -72,13 +72,13 @@ class Form
      * Ex: foo.edit -> foo
      * @return string
      */
-    public function buildBaseAction()
+    public function buildBaseAction(): void
     {
         $actionName = $this->request->route()->getName();
         $this->baseAction = substr($actionName, 0, strrpos($actionName, "."));
     }
 
-    public function buildFormMethod()
+    public function buildFormMethod(): void
     {
         $method = $this->request->route()->getActionMethod();
         $this->method = $method == 'edit' ? 'PUT' : 'POST';
@@ -283,7 +283,7 @@ class Form
 
     /**
      * Set rules array
-     * @param Object $objRules
+     * @param object $objRules
      */
     public function setRules(object $objRules): void
     {
@@ -337,8 +337,21 @@ class Form
         $this->ajax = false;
     }
 
-    public function setEntityName(string $entityName): void
+    public function activateCrudCustomization(string $crudName): void
     {
-        $this->entityName = $entityName;
+        $this->crudName = $crudName;
+        $modelAttribute = config("crud_eav.model_attribute");
+
+        // Guardando os atributos da entidade
+        $this->initial['eav_attributes'] = (new $modelAttribute())->where("crud_name", $crudName)->get()->map(function($item) {
+            $values = preg_split("/\r\n|\n|\r/", $item['attribute_values'], -1, PREG_SPLIT_NO_EMPTY);
+            $item['options'] = array_combine($values, $values);
+            return $item;
+        })->toArray();
+
+        // Organizando os valores correspondentes aos atributos
+        $this->initial['eav_values'] = collect($this->initial['crud_eav_values'])->mapWithKeys(function (array $item, int $key) {
+            return [$item['attribute_id'] => $item['value_text']];
+        })->toArray();
     }
 }

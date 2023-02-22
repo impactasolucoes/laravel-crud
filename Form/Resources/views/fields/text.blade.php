@@ -1,6 +1,6 @@
 <div class="row align-items-center mb-3">
 
-    @include('form::fields.label')
+  @include('form::fields.label')
 
     <div class="@if($col >= '10') col @else col-md-{{$col}} @endif">
         <input
