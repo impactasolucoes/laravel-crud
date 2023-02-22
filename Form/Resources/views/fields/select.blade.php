@@ -4,7 +4,7 @@
 
     <div class="@if($col >= '10') col @else col-md-{{$col}} @endif">
       <select
-        class="form-control {{ $class }}"
+        class="form-control form-select {{ $class }}"
         id="c-{{$id}}"
         name="{{$id}}"
         {{-- Atributos adicionais --}}

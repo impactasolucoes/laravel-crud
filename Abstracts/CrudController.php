@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
+use Impactasolucoes\Crud\Models\CrudEavValues;
 use LogicException;
 use ReflectionMethod;
 
@@ -19,6 +20,7 @@ abstract class CrudController extends Controller
 {
     public $request;
     public $id;
+    public $crudName;
 
     abstract function formulario(array $dados): Form;
 
@@ -79,6 +81,12 @@ abstract class CrudController extends Controller
 
         //  Executa o updateItem()
         $item = $this->updateItem($validacao, $id);
+
+        foreach ($request->get('crud_eav_attribute', []) as $attributeId => $value) {
+            $eavValueModel = CrudEavValues::firstOrNew(['crud_name' => $this->crudName, 'entity_id' => $id, 'attribute_id' => $attributeId]);
+            $eavValueModel->value_text = $value;
+            $eavValueModel->save();
+        }
 
         // Retorno padrão
         Msg::ok();

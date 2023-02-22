@@ -56,6 +56,7 @@ class CrudServiceProvider extends LaravelServiceProvider
         // Default configs
         // It can be replaced by the user in laravel /config/form.php file
         $this->mergeConfigFrom(__DIR__ . '/Configs/form.php', 'form');
+        $this->mergeConfigFrom(__DIR__.'/Configs/crud_eav.php', 'crud_eav');
 
         // Form Views
         $this->loadViewsFrom(__DIR__ . '/Form/Resources/views', 'form');
