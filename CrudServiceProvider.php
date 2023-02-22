@@ -62,7 +62,7 @@ class CrudServiceProvider extends LaravelServiceProvider
         $this->loadViewsFrom(__DIR__.'/Form/Resources/views', 'form');
 
         // Lang
-        $this->loadTranslationsFrom(__DIR__.'/c', 'form');
+        $this->loadTranslationsFrom(__DIR__.'/Form/Resources/lang', 'form');
     }
 
     /**

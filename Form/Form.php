@@ -242,7 +242,11 @@ class Form
             $this->panels[] = $panel;
         }
 
-        $formTemplate = $this->template ?? config("form.templates.form");
+        if (request()->get('customize', 0) == 1) {
+            $formTemplate = config("form.templates.customize");
+        } else {
+            $formTemplate = $this->template ?? config("form.templates.form");
+        }
 
         # Render form HTML
         return view(
