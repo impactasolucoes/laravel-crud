@@ -37,16 +37,15 @@ class CrudServiceProvider extends LaravelServiceProvider
 
         // Publish Views
         $this->publishes([
-            __DIR__.'/Listing/Resources/views' => resource_path('views/vendor/impactasolucoes/laravel-crud/listing'),
-            __DIR__.'/Form/Resources/views' => resource_path('views/vendor/impactasolucoes/laravel-crud/form'),
+            __DIR__ . '/Listing/Resources/views' => resource_path('views/vendor/impactasolucoes/laravel-crud/listing'),
+            __DIR__ . '/Form/Resources/views' => resource_path('views/vendor/impactasolucoes/laravel-crud/form'),
         ], 'views');
 
         // Publish Lang
         $this->publishes([
-            __DIR__.'/Listing/Resources/lang' => resource_path('lang/vendor/impactasolucoes/laravel-crud/listing'),
-            __DIR__.'/Form/Resources/lang' => resource_path('lang/vendor/impactasolucoes/laravel-crud/form'),
+            __DIR__ . '/Listing/Resources/lang' => resource_path('lang/vendor/impactasolucoes/laravel-crud/listing'),
+            __DIR__ . '/Form/Resources/lang' => resource_path('lang/vendor/impactasolucoes/laravel-crud/form'),
         ], 'views');
-
     }
 
     /**
@@ -56,13 +55,13 @@ class CrudServiceProvider extends LaravelServiceProvider
     {
         // Default configs
         // It can be replaced by the user in laravel /config/form.php file
-        $this->mergeConfigFrom(__DIR__.'/Configs/form.php', 'form');
+        $this->mergeConfigFrom(__DIR__ . '/Configs/form.php', 'form');
 
         // Form Views
-        $this->loadViewsFrom(__DIR__.'/Form/Resources/views', 'form');
+        $this->loadViewsFrom(__DIR__ . '/Form/Resources/views', 'form');
 
         // Lang
-        $this->loadTranslationsFrom(__DIR__.'/c', 'form');
+        $this->loadTranslationsFrom(__DIR__ . '/Form/Resources/lang', 'form');
     }
 
     /**
@@ -72,13 +71,12 @@ class CrudServiceProvider extends LaravelServiceProvider
     {
         // Default configs
         // It can be replaced by the user in laravel /config/form.php file
-        $this->mergeConfigFrom(__DIR__.'/Configs/listing.php', 'listing');
+        $this->mergeConfigFrom(__DIR__ . '/Configs/listing.php', 'listing');
 
         // Translations
-        $this->loadTranslationsFrom(__DIR__.'/Listing/Resources/lang', 'listing');
+        $this->loadTranslationsFrom(__DIR__ . '/Listing/Resources/lang', 'listing');
 
         // listing Views
-        $this->loadViewsFrom(__DIR__.'/Listing/Resources/views', 'listing');
+        $this->loadViewsFrom(__DIR__ . '/Listing/Resources/views', 'listing');
     }
-
 }
