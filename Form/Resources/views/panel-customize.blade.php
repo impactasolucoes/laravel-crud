@@ -17,27 +17,27 @@
                 <div class="card-body">
 
                     @foreach ($panel->fields as $field)
+
+                    {{  $field->buildRules($form->getRules(), $form->initial) }}
+
+
                         <div class="row mb-2">
                             <div class="col-2">
                                 @if ($field->required)
                                     <span class="text-danger">*</span>
                                 @endif
                             {{ $field->label }}</div>
-                            <div class="col-2">ação</div>
-                            <div class="col"><input class="form-control" type="text" name=""></div>
+                            <div class="col-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" @if ($field->required)
+                                        @checked(true)
+                                        @disabled(true)
+                                    @endif checked="">
+                                </div>
+                            </div>
+                            <div class="col"><input class="form-control" type="text" name="" value="{{ $field->label }}"></div>
                         </div>
 
-                        {{-- <div class="fieldBlock"
-                            data-field-name="{{ $field->id }}"
-                            @if (isset($field->options['show_rules'])) data-show-rules='@json($field->options['show_rules'])' @endif
-                            >
-
-
-
-
-                            {!! $field->render($form->initial, $form->getRules()) !!}
-
-                        </div> --}}
                     @endforeach
 
                 </div>
@@ -63,8 +63,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($form->initial['eav_attributes'] as $attribute)
+
                         <tr>
-                            <td><input class="form-control" type="text" name="campo[]"></td>
+                            <td><input class="form-control" type="text" name="campo[]" value="{{ $attribute['attribute_label'] }}"/> </td>
                             <td>
                                 <select name="tipo[]" class="form-select">
                                     <option value="text">Text</option>
@@ -75,6 +77,7 @@
                                 <textarea name="valores[]" class="form-control"></textarea>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

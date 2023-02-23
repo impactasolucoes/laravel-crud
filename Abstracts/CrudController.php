@@ -44,7 +44,7 @@ abstract class CrudController extends Controller
     {
         if (!isset($this->id)) {
             throw new LogicException(get_class($this) . ' deve ter a propriedade $id');
-        }  
+        }
         $this->request = request();
     }
 
@@ -60,7 +60,7 @@ abstract class CrudController extends Controller
         $dependenceClass = (string)$parameter->getType();
         $validacao = app($dependenceClass);
         $validacao->setValidator( Validator::make( $request->all(), $validacao->rules(), $validacao->messages() ) );
-        
+
         //  Executa o storeItem()
         $item = $this->storeItem($validacao);
 

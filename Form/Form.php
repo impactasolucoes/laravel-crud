@@ -236,6 +236,8 @@ class Form
      */
     public function render()
     {
+
+
         # Build a new panel if variable panels is empty
         if (empty($this->panels)) {
             $panel = $this->panel();
@@ -353,8 +355,11 @@ class Form
         })->toArray();
 
         // Organizando os valores correspondentes aos atributos
-        $this->initial['eav_values'] = collect($this->initial['crud_eav_values'])->mapWithKeys(function (array $item, int $key) {
-            return [$item['attribute_id'] => $item['value_text']];
-        })->toArray();
+        if (isset($this->initial[$this->primaryKey])) {
+            $this->initial['eav_values'] = collect($this->initial['crud_eav_values'] ?? [])->mapWithKeys(function (array $item, int $key) {
+                return [$item['attribute_id'] => $item['value_text']];
+            })->toArray();
+        }
+
     }
 }
