@@ -5,6 +5,7 @@ return [
     'templates' => [
 
         'form' => 'form::form',
+        'customize' => 'form::customize',
         'panel' => 'form::panel',
         'actions' => 'form::actions',
 
