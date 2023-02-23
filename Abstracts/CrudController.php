@@ -42,7 +42,7 @@ abstract class CrudController extends Controller
     {
         if (!isset($this->id)) {
             throw new LogicException(get_class($this) . ' deve ter a propriedade $id');
-        }  
+        }
         $this->request = request();
     }
 
@@ -50,17 +50,23 @@ abstract class CrudController extends Controller
      * Criando um método padrão "store()" para os eventos de salvar dados.
      * Este método chamará o storeItem()
      */
-    public function store(Request $request)
+    public function store()
     {
+        $funcArgs = func_get_args();
+        $request = request();
+
         // Faz a validação com Reflection do médoto storeItem()
         $constructor = new ReflectionMethod($this, 'storeItem');
         $parameter = $constructor->getParameters()[0];
         $dependenceClass = (string)$parameter->getType();
         $validacao = app($dependenceClass);
-        $validacao->setValidator( Validator::make( $request->all(), $validacao->rules(), $validacao->messages() ) );
-        
+        $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
+
+        // Pegando todos os parametros da rota e juntando com a request
+        $params = [ $validacao, ...$funcArgs ];
+
         //  Executa o storeItem()
-        $item = $this->storeItem($validacao);
+        $item = $this->storeItem(...$params);
 
         // Retorno padrão
         Msg::ok();
@@ -68,17 +74,23 @@ abstract class CrudController extends Controller
     }
 
 
-    public function update(Request $request, int $id)
+    public function update()
     {
+        $funcArgs = func_get_args();
+        $request = request();
+
         // Faz a validação com Reflection do médoto storeItem()
         $constructor = new ReflectionMethod($this, 'updateItem');
         $parameter = $constructor->getParameters()[0];
         $dependenceClass = (string)$parameter->getType();
         $validacao = app($dependenceClass);
-        $validacao->setValidator( Validator::make( $request->all(), $validacao->rules(), $validacao->messages() ) );
+        $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
+
+        // Pegando todos os parametros da rota e juntando com a request
+        $params = [ $validacao, ...$funcArgs ];
 
         //  Executa o updateItem()
-        $item = $this->updateItem($validacao, $id);
+        $item = $this->updateItem(...$params);
 
         // Retorno padrão
         Msg::ok();
