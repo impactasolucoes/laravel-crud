@@ -2,7 +2,7 @@
 
 Laravel CRUD Tools v2
 
-- :link: - [01 - Instalação](https://github.com/Impactasolucoes/laravel-crud/wiki/01.-Instala%C3%A7%C3%A3o)
+- :link: - [01 - Instalação](https://github.com/impactasolucoes/laravel-crud/wiki/instalacao)
 - :link: - [02 - Criando um CRUD completo](https://github.com/Impactasolucoes/laravel-crud/wiki/02.-Como-criar-um-crud-completo)
 - :link: - [03 - Criando CRUD a partir de uma model](https://github.com/Impactasolucoes/laravel-crud/wiki/03.-Criando-um-CRUD-apartir-de-uma-Model)
 - :link: - [04 - Visão geral - Campos e Panels](https://github.com/Impactasolucoes/laravel-crud/wiki/04.-Vis%C3%A3o-Geral---Campos-e-Panels)
