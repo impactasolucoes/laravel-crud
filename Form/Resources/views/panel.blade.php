@@ -1,6 +1,6 @@
-<div id="abas-form-{{ $form->formId }}">
+<div class="accordion" id="abas-form-{{ $form->formId }}">
     @foreach ($form->panels as $index => $panel)
-        <div class="card mb-4 border overflow-visible"
+        <div class="overflow-visible"
             data-field-name="panel-{{ $index }}"
             @foreach ($panel->attrs as $atributo => $valorAtributo)
                 @if ( $atributo === 'data-show-rules-panel')
@@ -13,20 +13,22 @@
                 @endif
             @endforeach
             >
-            <div class="card-header" id="aba-{{$panel->getPanelId()}}">
-                {{ $panel->title }}
+            <div class="row card-header pb-0" id="aba-{{ $panel->getPanelId() }}">
+                <h4 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                        data-target="#collapse-{{ $panel->getPanelId() }}"
+                        aria-controls="collapse-{{ $panel->getPanelId() }}" aria-expanded="false">
+                        {{ $panel->title }}
+                    </button>
+                </h4>
             </div>
-            <div
-                id="collapse-{{$panel->getPanelId()}}"
-                data-parent="#abas-form-{{ $form->formId }}"
-                >
-                <div class="card-body">
+            <div id="collapse-{{ $panel->getPanelId() }}" aria-labelledby="aba-{{ $panel->getPanelId() }}"
+                data-parent="#abas-form-{{ $form->formId }}" class="collapse show">
+                <div class="card-body px-0 pt-0 pb-2">
 
                     @foreach ($panel->fields as $field)
-                        <div class="fieldBlock"
-                            data-field-name="{{ $field->id }}"
-                            @if(isset($field->options['show_rules'])) data-show-rules='@json($field->options['show_rules'])' @endif
-                            >
+                        <div class="fieldBlock" data-field-name="{{ $field->id }}"
+                            @if (isset($field->options['show_rules'])) data-show-rules='@json($field->options['show_rules'])' @endif>
 
                             {!! $field->render($form->initial, $form->getRules()) !!}
 
@@ -50,25 +52,25 @@
 
                     @if($attribute['attribute_type'] == 'select')
                         @include('form::fields.select', [
-                            'id' => "crud_eav_attribute[".$attribute['id']."]", 
-                            'required' => false, 
-                            'label' => $attribute['attribute_label'], 
+                            'id' => "crud_eav_attribute[".$attribute['id']."]",
+                            'required' => false,
+                            'label' => $attribute['attribute_label'],
                             'selectOptions' => $attribute['options'],
-                            'help' => '', 
-                            'col' => 10, 
-                            'class' => '', 
+                            'help' => '',
+                            'col' => 10,
+                            'class' => '',
                             'attrs' => [],
                             'value' => $form->initial['eav_values'][$attribute['id']] ?? ""
                         ])
 
                     @else
                         @include('form::fields.text', [
-                            'id' => "crud_eav_attribute[".$attribute['id']."]", 
-                            'required' => false, 
-                            'label' => $attribute['attribute_label'], 
-                            'help' => '', 
-                            'col' => 10, 
-                            'class' => '', 
+                            'id' => "crud_eav_attribute[".$attribute['id']."]",
+                            'required' => false,
+                            'label' => $attribute['attribute_label'],
+                            'help' => '',
+                            'col' => 10,
+                            'class' => '',
                             'attrs' => [],
                             'value' => $form->initial['eav_values'][$attribute['id']] ?? ""
                         ])
