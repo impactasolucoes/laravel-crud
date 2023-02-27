@@ -12,6 +12,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
+use Impactasolucoes\Crud\Models\CrudEavConfigs;
+use Impactasolucoes\Crud\Models\CrudEavAttributes;
 use Impactasolucoes\Crud\Models\CrudEavValues;
 use LogicException;
 use ReflectionMethod;
@@ -48,18 +50,81 @@ abstract class CrudController extends Controller
         $this->request = request();
     }
 
+
+    protected function camposPadrao(Request $request)
+    {
+        $constructor = new ReflectionMethod($this, 'storeItem');
+        $parameter = $constructor->getParameters()[0];
+        $dependenceClass = (string) $parameter->getType();
+
+        $validacao = new $dependenceClass;
+
+        $camposValidacao = $validacao->rules();
+
+        CrudEavConfigs::where('crud_name', $this->crudName)->delete();
+        foreach ($camposValidacao as $campo => $valida) {
+
+            if (!in_array('required', $valida)) {
+                $ativo = (int) isset($request->all()['check_' . $campo]);
+            } else {
+                $ativo = 1;
+            }
+
+            $conf = CrudEavConfigs::create(['crud_name' => $this->crudName, 'config_name' => $campo, 'config_value' => json_encode(['label' => $request->all()[$campo], 'ativo' => $ativo])]);
+            $conf->save();
+        }
+
+    }
+
+
+    public function camposPersonalizados(Request $request)
+    {
+        $campos = $request->campos;
+        $tipos = $request->tipos;
+        $valores = $request->valores;
+
+
+        CrudEavAttributes::where('crud_name', $this->crudName)->delete();
+        if (empty($campos))
+            return;
+
+        foreach ($campos as $c => $campo) {
+            if (empty($campo))
+                continue;
+
+            $att = CrudEavAttributes::create(['crud_name' => $this->crudName, 'attribute_type' => $tipos[$c], 'attribute_label' => $campo, 'attribute_values' => $valores[$c]]);
+            $att->save();
+        }
+
+    }
+
+
     /*
      * Criando um método padrão "store()" para os eventos de salvar dados.
      * Este método chamará o storeItem()
      */
     public function store(Request $request)
     {
+
+        // Adicionando customização de campos
+        if ($request->customize) {
+
+            // Campos padrão
+            $this->camposPadrao($request);
+            // Campos personalizados
+            $this->camposPersonalizados($request);
+
+            Msg::ok();
+            return back();
+        }
+
+
         // Faz a validação com Reflection do médoto storeItem()
         $constructor = new ReflectionMethod($this, 'storeItem');
         $parameter = $constructor->getParameters()[0];
-        $dependenceClass = (string)$parameter->getType();
+        $dependenceClass = (string) $parameter->getType();
         $validacao = app($dependenceClass);
-        $validacao->setValidator( Validator::make( $request->all(), $validacao->rules(), $validacao->messages() ) );
+        $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
 
         //  Executa o storeItem()
         $item = $this->storeItem($validacao);
@@ -75,9 +140,9 @@ abstract class CrudController extends Controller
         // Faz a validação com Reflection do médoto storeItem()
         $constructor = new ReflectionMethod($this, 'updateItem');
         $parameter = $constructor->getParameters()[0];
-        $dependenceClass = (string)$parameter->getType();
+        $dependenceClass = (string) $parameter->getType();
         $validacao = app($dependenceClass);
-        $validacao->setValidator( Validator::make( $request->all(), $validacao->rules(), $validacao->messages() ) );
+        $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
 
         //  Executa o updateItem()
         $item = $this->updateItem($validacao, $id);
@@ -237,7 +302,7 @@ abstract class CrudController extends Controller
 
         switch ($action) {
 
-                # Salvar - Envia o usuário para o ID do crud submitado
+            # Salvar - Envia o usuário para o ID do crud submitado
             case 'save':
                 if (!$id) {
                     throw new Exception("ID not defined");
@@ -245,12 +310,12 @@ abstract class CrudController extends Controller
                 $redir = $this->redirecionaEditar($route, $id);
                 break;
 
-                # Salvar e Novo - Envia o usuário para a nova rota, mantendo o redir
+            # Salvar e Novo - Envia o usuário para a nova rota, mantendo o redir
             case 'save_create':
                 $redir = $this->redirecionaNovo($route);
                 break;
 
-                # Salvar e pŕoximo - Envia o usuário para o próximo ID no parâmetros 'ids'
+            # Salvar e pŕoximo - Envia o usuário para o próximo ID no parâmetros 'ids'
             case 'save_next':
                 if (!$id) {
                     throw new Exception("ID not defined");
@@ -258,13 +323,13 @@ abstract class CrudController extends Controller
                 $redir = $this->redirecionaProximo($id, $route);
                 break;
 
-                # Salvar e fechar - Volta para querystring na rota
-                # Caso a url não tenha querystring envia o usuário para a route selecionada
+            # Salvar e fechar - Volta para querystring na rota
+            # Caso a url não tenha querystring envia o usuário para a route selecionada
             case 'save_close':
                 $redir = $this->redirecionaQuerystring($route);
                 break;
 
-                # Envia o usuário para a route informada caso não seja as ações acima
+            # Envia o usuário para a route informada caso não seja as ações acima
             default:
                 $redir = $this->redirecionaRoute($route);
                 break;
