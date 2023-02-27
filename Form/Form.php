@@ -349,13 +349,13 @@ class Form
         $modelConfigs = config("crud_eav.model_configs");
 
 
-        // Guardando os atributos da entidade
         $this->initial['eav_configs'] = (new $modelConfigs())->where("crud_name", $crudName)->get()->map(function ($item, $chave) {
             return json_decode($item['config_value'], true);
         })->toArray();
 
 
         // Guardando os atributos da entidade
+
         $this->initial['eav_attributes'] = (new $modelAttribute())->where("crud_name", $crudName)->get()->map(function ($item) {
             $values = preg_split("/\r\n|\n|\r/", $item['attribute_values'], -1, PREG_SPLIT_NO_EMPTY);
             $item['options'] = array_combine($values, $values);

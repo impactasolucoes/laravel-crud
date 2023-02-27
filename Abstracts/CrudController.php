@@ -133,7 +133,7 @@ abstract class CrudController extends Controller
         $params = [ $validacao, ...$funcArgs ];
 
         //  Executa o storeItem()
-        $item = $this->storeItem($validacao);
+        $item = $this->storeItem(...$params);
 
         // Retorno padrão
         Msg::ok();
