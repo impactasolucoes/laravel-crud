@@ -369,6 +369,5 @@ class Form
                 return [$item['attribute_id'] => $item['value_text']];
             })->toArray();
         }
-
     }
 }

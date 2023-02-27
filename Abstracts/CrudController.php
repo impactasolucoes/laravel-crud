@@ -51,7 +51,7 @@ abstract class CrudController extends Controller
     }
 
 
-    protected function camposPadrao(Request $request)
+    protected function camposPadrao($request)
     {
         $constructor = new ReflectionMethod($this, 'storeItem');
         $parameter = $constructor->getParameters()[0];
@@ -77,7 +77,7 @@ abstract class CrudController extends Controller
     }
 
 
-    public function camposPersonalizados(Request $request)
+    public function camposPersonalizados($request)
     {
         $campos = $request->campos;
         $tipos = $request->tipos;
@@ -103,8 +103,10 @@ abstract class CrudController extends Controller
      * Criando um método padrão "store()" para os eventos de salvar dados.
      * Este método chamará o storeItem()
      */
-    public function store(Request $request)
+    public function store()
     {
+        $funcArgs = func_get_args();
+        $request = request();
 
         // Adicionando customização de campos
         if ($request->customize) {
@@ -126,6 +128,10 @@ abstract class CrudController extends Controller
         $validacao = app($dependenceClass);
         $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
 
+
+        // Pegando todos os parametros da rota e juntando com a request
+        $params = [ $validacao, ...$funcArgs ];
+
         //  Executa o storeItem()
         $item = $this->storeItem($validacao);
 
@@ -135,17 +141,23 @@ abstract class CrudController extends Controller
     }
 
 
-    public function update(Request $request, int $id)
+    public function update()
     {
+        $funcArgs = func_get_args();
+        $request = request();
+
         // Faz a validação com Reflection do médoto storeItem()
         $constructor = new ReflectionMethod($this, 'updateItem');
         $parameter = $constructor->getParameters()[0];
-        $dependenceClass = (string) $parameter->getType();
+        $dependenceClass = (string)$parameter->getType();
         $validacao = app($dependenceClass);
         $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
 
+        // Pegando todos os parametros da rota e juntando com a request
+        $params = [ $validacao, ...$funcArgs ];
+
         //  Executa o updateItem()
-        $item = $this->updateItem($validacao, $id);
+        $item = $this->updateItem(...$params);
 
         foreach ($request->get('crud_eav_attribute', []) as $attributeId => $value) {
             $eavValueModel = CrudEavValues::firstOrNew(['crud_name' => $this->crudName, 'entity_id' => $id, 'attribute_id' => $attributeId]);
