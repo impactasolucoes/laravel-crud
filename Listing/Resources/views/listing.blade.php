@@ -18,7 +18,7 @@
                             data-method="{{ $action->getMethod() }}"
                             title="{{ strip_tags($action->getLabel()) }}"
                             data-confirmation="{{ $action->getConfirmationText() }}"
-                            data-toggle="tooltip"
+                            data-bs-toggle="tooltip"
                             data-placement="top"
                         >
                             @if($action->getIcon())
