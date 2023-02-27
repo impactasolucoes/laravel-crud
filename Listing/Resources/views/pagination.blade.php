@@ -19,8 +19,8 @@
 
     <div class="row my-3">
 
-        <div class="col-6">
-            <div class="d-flex justify-content-start align-items-center flex-wrap mt-3 text-center">
+        <div class="col-12 col-md-6">
+            <div class="d-flex justify-content-center justify-content-md-start align-items-center flex-wrap mt-3 text-center">
 
                 <label class="text-start me-2 mb-0 fs-6">Por página:</label>
                 <div class="form-group mb-0">
@@ -40,7 +40,7 @@
         </div>
 
 
-        <div class="col-6 d-flex justify-content-end">
+        <div class="col-12 col-md-6 d-flex justify-content-end">
             <div class="pagination-container d-flex justify-content-center align-items-center flex-wrap mt-3 text-center mb-0">
                 <label class="text-center fs-6 me-2 mb-0">Ir para página:</label>
 
