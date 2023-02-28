@@ -5,10 +5,10 @@
 
     <div>
         @if ($actions && !$formToFieldId)
-            <div class="row card-header pb-0">
-                <div class="col-sm-8 row">
+            <div class="row card-header pb-0 justify-content-center justify-content-md-start">
+                <div class="col-12 col-md-8 row mb-3 mb-md-0">
                     @foreach ($actions as $action)
-                    <div class="col-sm-3">
+                    <div class="col-4 col-md-3">
                         <button
                             type="button"
                             class="btn btn-icon btn-3 {{ $action->getName() == 'destroy' ? 'btn-danger' : 'btn-primary' }} w-100 mb-0 tooltips actionButton"
@@ -23,7 +23,7 @@
                         >
                             @if($action->getIcon())
                                 <i class="{{ $action->getIcon() }}"></i>
-                                <span>
+                                <span class="d-none d-md-inline mb-3 mb-md-0">
                                     {{ $action->getLabel() }}
                                 </span>
                             @else
@@ -34,7 +34,7 @@
                     @endforeach
                 </div>
         @endif
-                <div class="col-sm-4">
+                <div class="col-12 col-md-4">
                     @include('listing::search')
                 </div>
             </div>
