@@ -1,4 +1,7 @@
 (function(moment, $) {
+
+    var moment = require('moment');
+
   /**
    * For handle date with time
    */

@@ -1,4 +1,10 @@
+// import Inputmask from "inputmask";
 (function ($) {
+
+    var Inputmask = require('inputmask');
+
+
+
     $(document).ready(function () {
           const hasInputWithMask = $("[data-input]")[0];
 

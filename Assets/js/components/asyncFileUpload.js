@@ -1,7 +1,7 @@
 module.exports = function asyncFileUpload() {
   const $inputs = window.jQuery('[data-file="async-upload"]');
   let inProgrees = false;
-  const method = window.jQuery('input[name="_method"').val();
+  const method = window.jQuery('input[name="_method"]').val();
   const action = window.jQuery("#form").attr("action");
   if (!$inputs.length) return;
 
