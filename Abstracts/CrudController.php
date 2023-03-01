@@ -64,6 +64,10 @@ abstract class CrudController extends Controller
         CrudEavConfigs::where('crud_name', $this->crudName)->delete();
         foreach ($camposValidacao as $campo => $valida) {
 
+            if(!isset($request->all()[$campo])){
+                continue;
+            }
+
             if (!in_array('required', $valida)) {
                 $ativo = (int) isset($request->all()['check_' . $campo]);
             } else {

@@ -30,6 +30,8 @@
         <input type="hidden" name="{{$form->primaryKey}}" value="{{$form->primaryKeyValue}}" data-id>
     @endif
 
+    {{-- {{ dd($form) }} --}}
+
     {{-- Render template for panels --}}
     <div class="panel-group" id="Abas" role="tablist" aria-multiselectable="true">
 
@@ -53,6 +55,9 @@
 
                             @foreach ($panel->fields as $c => $field)
 
+
+
+
                             {{  $field->buildRules($form->getRules(), $form->initial) }}
 
                                 @if ($field->label == "ID")
@@ -71,7 +76,7 @@
                                             @if ($field->required)
                                                 @checked(true)
                                                 @disabled(true)
-                                            @elseif (!$form->initial['eav_configs'][$c]['ativo'])
+                                            @elseif (isset($form->initial['eav_configs'][$c]['ativo']) && !empty($form->initial['eav_configs'][$c]['ativo']))
                                                 @checked(false)
                                             @else
                                                 @checked(true)
@@ -109,6 +114,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (!empty($form->initial['eav_attributes']))
+
                                 @foreach ($form->initial['eav_attributes'] as $attribute)
 
                                 <tr>
@@ -128,6 +135,7 @@
                                     <td> <button class="btn" type="button" onclick="eavDelete(this)" >Delete</button></td>
                                 </tr>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

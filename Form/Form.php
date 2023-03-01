@@ -354,6 +354,8 @@ class Form
         })->toArray();
 
 
+        // dd($this->initial);
+
         // Guardando os atributos da entidade
 
         $this->initial['eav_attributes'] = (new $modelAttribute())->where("crud_name", $crudName)->get()->map(function ($item) {
