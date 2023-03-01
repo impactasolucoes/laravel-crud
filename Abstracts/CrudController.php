@@ -19,7 +19,7 @@ use ReflectionMethod;
 abstract class CrudController extends Controller
 {
     public $request;
-    public $id;
+    public $id = 'id';
     public $crudName;
 
     abstract function formulario(array $dados): Form;
@@ -65,7 +65,7 @@ abstract class CrudController extends Controller
         $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
 
         // Pegando todos os parametros da rota e juntando com a request
-        $params = [ $validacao, ...$funcArgs ];
+        $params = [$validacao, ...$funcArgs];
 
         //  Executa o storeItem()
         $item = $this->storeItem(...$params);
@@ -89,7 +89,7 @@ abstract class CrudController extends Controller
         $validacao->setValidator(Validator::make($request->all(), $validacao->rules(), $validacao->messages()));
 
         // Pegando todos os parametros da rota e juntando com a request
-        $params = [ $validacao, ...$funcArgs ];
+        $params = [$validacao, ...$funcArgs];
 
         //  Executa o updateItem()
         $item = $this->updateItem(...$params);
