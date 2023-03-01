@@ -244,11 +244,11 @@ class Form
             $this->panels[] = $panel;
         }
 
+        $formTemplate = $this->template ?? config("form.templates.form");
         if (request()->get('customize', 0) == 1) {
             $formTemplate = config("form.templates.customize");
-        } else {
-            $formTemplate = $this->template ?? config("form.templates.form");
         }
+
         # Render form HTML
         return view(
             $formTemplate,
@@ -348,16 +348,12 @@ class Form
         $modelAttribute = config("crud_eav.model_attribute");
         $modelConfigs = config("crud_eav.model_configs");
 
-
-        $this->initial['eav_configs'] = (new $modelConfigs())->where("crud_name", $crudName)->get()->map(function ($item, $chave) {
+        // Carregando as configuraçẽos do form
+        $this->initial['eav_configs'] = (new $modelConfigs())->where("crud_name", $crudName)->get()->map(function ($item) {
             return json_decode($item['config_value'], true);
         })->toArray();
 
-
-        // dd($this->initial);
-
         // Guardando os atributos da entidade
-
         $this->initial['eav_attributes'] = (new $modelAttribute())->where("crud_name", $crudName)->get()->map(function ($item) {
             $values = preg_split("/\r\n|\n|\r/", $item['attribute_values'], -1, PREG_SPLIT_NO_EMPTY);
             $item['options'] = array_combine($values, $values);
