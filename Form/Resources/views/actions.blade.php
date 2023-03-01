@@ -11,7 +11,7 @@
                     {{$action[0]}}
                 </button>
                 @if (count($form->actions) > 1)
-                    <button type="button" class="btn btn-primary dropdown-toggle" 
+                    <button type="button" class="btn btn-primary dropdown-toggle"
                             data-toggle="dropdown"
                             data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -41,5 +41,3 @@
 
     </div>
 </div>
-
-<BR><BR><a href="?eav=1&redir={{ urlencode(url()->current()) }}">Customizar form</a>

@@ -38,6 +38,10 @@
                 <input type="hidden" name="{{$form->primaryKey}}" value="{{$form->primaryKeyValue}}" data-id>
             @endif
 
+            <div class="text-end">
+                <a data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Personalizar este formulário" class="link-primary" href="?customize=1&redir={{ urlencode(url()->current()) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+            </div>
+
             {{-- Render template for panels --}}
             <div class="panel-group" id="Abas" role="tablist" aria-multiselectable="true">
                 @include($panelTemplate)
