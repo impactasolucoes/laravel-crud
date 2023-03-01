@@ -23,7 +23,7 @@ class BaseField
     /**
      * @var string
      */
-    protected $label = "";
+    public $label = "";
     /**
      * @var array
      */
@@ -47,7 +47,7 @@ class BaseField
     /**
      * @var bool
      */
-    protected $required = false;
+    public $required = false;
     /**
      * @var string
      */

@@ -124,7 +124,7 @@ class Form
     public function clearActions($actions = [])
     {
         if (!empty($actions)) {
-            foreach ((array)$actions as $actionName) {
+            foreach ((array) $actions as $actionName) {
                 unset($this->actions[$actionName]);
             }
         } else {
@@ -236,6 +236,8 @@ class Form
      */
     public function render()
     {
+
+
         # Build a new panel if variable panels is empty
         if (empty($this->panels)) {
             $panel = $this->panel();
@@ -243,6 +245,9 @@ class Form
         }
 
         $formTemplate = $this->template ?? config("form.templates.form");
+        if (request()->get('customize', 0) == 1) {
+            $formTemplate = config("form.templates.customize");
+        }
 
         # Render form HTML
         return view(
@@ -341,6 +346,12 @@ class Form
     {
         $this->crudName = $crudName;
         $modelAttribute = config("crud_eav.model_attribute");
+        $modelConfigs = config("crud_eav.model_configs");
+
+        // Carregando as configuraçẽos do form
+        $this->initial['eav_configs'] = (new $modelConfigs())->where("crud_name", $crudName)->get()->map(function ($item) {
+            return json_decode($item['config_value'], true);
+        })->toArray();
 
         // Guardando os atributos da entidade
         $this->initial['eav_attributes'] = (new $modelAttribute())->where("crud_name", $crudName)->get()->map(function ($item) {
@@ -348,6 +359,7 @@ class Form
             $item['options'] = array_combine($values, $values);
             return $item;
         })->toArray();
+
 
         // Organizando os valores correspondentes aos atributos
         if (isset($this->initial[$this->primaryKey])) {
