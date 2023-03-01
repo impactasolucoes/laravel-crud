@@ -124,7 +124,7 @@ class Form
     public function clearActions($actions = [])
     {
         if (!empty($actions)) {
-            foreach ((array)$actions as $actionName) {
+            foreach ((array) $actions as $actionName) {
                 unset($this->actions[$actionName]);
             }
         } else {
@@ -236,14 +236,19 @@ class Form
      */
     public function render()
     {
+
+
         # Build a new panel if variable panels is empty
         if (empty($this->panels)) {
             $panel = $this->panel();
             $this->panels[] = $panel;
         }
 
-        $formTemplate = $this->template ?? config("form.templates.form");
-
+        if (request()->get('customize', 0) == 1) {
+            $formTemplate = config("form.templates.customize");
+        } else {
+            $formTemplate = $this->template ?? config("form.templates.form");
+        }
         # Render form HTML
         return view(
             $formTemplate,
@@ -341,13 +346,22 @@ class Form
     {
         $this->crudName = $crudName;
         $modelAttribute = config("crud_eav.model_attribute");
+        $modelConfigs = config("crud_eav.model_configs");
+
+
+        $this->initial['eav_configs'] = (new $modelConfigs())->where("crud_name", $crudName)->get()->map(function ($item, $chave) {
+            return json_decode($item['config_value'], true);
+        })->toArray();
+
 
         // Guardando os atributos da entidade
+
         $this->initial['eav_attributes'] = (new $modelAttribute())->where("crud_name", $crudName)->get()->map(function ($item) {
             $values = preg_split("/\r\n|\n|\r/", $item['attribute_values'], -1, PREG_SPLIT_NO_EMPTY);
             $item['options'] = array_combine($values, $values);
             return $item;
         })->toArray();
+
 
         // Organizando os valores correspondentes aos atributos
         if (isset($this->initial[$this->primaryKey])) {
