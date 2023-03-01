@@ -4,8 +4,8 @@
     @endif
     {{ $label }}:
     @if ($help)
-        <img src="{{ asset('/vendor/Impactasolucoes/crud/form/tooltip.png') }}" alt="tooltip" data-toggle="tooltip"
-            data-placement="top" class="tooltip-icon" title="{{ $help }}" />
+        <a data-bs-toggle="tooltip" data-bs-placement="right" title="{{ $help }}">
+            <i class="fa-regular fa-circle-question"></i>
+        </a>
     @endif
-
 </label>
