@@ -76,7 +76,7 @@
                                             @if ($field->required)
                                                 @checked(true)
                                                 @disabled(true)
-                                            @elseif (isset($form->initial['eav_configs'][$c]['ativo']) && !empty($form->initial['eav_configs'][$c]['ativo']))
+                                            @elseif (isset($form->initial['eav_configs'][$c]['ativo']) && empty($form->initial['eav_configs'][$c]['ativo']))
                                                 @checked(false)
                                             @else
                                                 @checked(true)
