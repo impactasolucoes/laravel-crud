@@ -214,6 +214,7 @@ class DataSource
         if (isset($queryString['q'])) {
             $searchTextParts = $this->getSearchTextParts(trim($queryString['q']));
             foreach ($searchTextParts as $searchText) {
+                $searchText = preg_replace('/[[:^print:]]/', "", $searchText);
                 $whereRaw .= " AND (";
                 $i = 0;
 
@@ -241,6 +242,7 @@ class DataSource
             }
 
             $searchText = trim($queryString[$columnQueryString]);
+            $searchText = preg_replace('/[[:^print:]]/', "", $searchText);
             if ($searchText === '') {
                 continue;
             }
