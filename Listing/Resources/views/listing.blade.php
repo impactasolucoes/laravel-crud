@@ -48,7 +48,7 @@
 
     @if($data && $columns)
     <div class="card-body px-0 pt-0 pb-2">
-        <div class="table-resposive p-0">
+        <div class="table-resposive p-0"  style="overflow-x: scroll;">
             <table class="table table-striped table-hover align-items-center mb-0" id="listagemTable" data-redir="{{ url()->full() }}">
 
                 {{-- Cabeçalho com as columns --}}
