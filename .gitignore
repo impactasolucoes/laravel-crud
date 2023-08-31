@@ -5,6 +5,7 @@ npm-debug.log
 yarn-error.log
 .vscode
 .idea
+composer.lock
 
 # Laravel 4 specific
 bootstrap/compiled.php
