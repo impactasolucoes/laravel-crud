@@ -25,6 +25,5 @@
         "Impactasolucoes\\Crud\\CrudServiceProvider"
       ]
     }
-  },
-  "version": "0.1.1"
+  }
 }
