@@ -2,7 +2,7 @@
   "name": "impactasolucoes/laravel-crud",
   "description": "Laravel Crud Tools",
   "type": "library",
-  "license": "",
+  "license": "MIT",
   "authors": [
     {
       "name": "Impacta Soluções Web",
@@ -16,8 +16,8 @@
     }
   },
   "require": {
-    "php": ">=7.2",
-    "laravel/framework": ">=5.7"
+    "php": "^7.2",
+    "laravel/framework": "^5.7"
   },
   "extra": {
     "laravel": {
