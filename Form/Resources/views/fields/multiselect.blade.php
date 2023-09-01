@@ -5,7 +5,7 @@
     <div class="@if($col >= '10') col @else col-md-{{$col}} @endif">
         <select
             multiple
-            class="form-control {{ $class }}"
+            class="form-control {{ $class }} d-none"
             id="c-{{$id}}"
             name="{{$id}}[]"
 
