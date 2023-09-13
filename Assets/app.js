@@ -14,6 +14,13 @@ require("./js/customs/mask");
 require("./js/customs/textarea");
 require("./js/customs/select2");
 
+
+// Inputmask
+window.moment = require('inputmask');
+
+// Moment
+window.moment = require('moment');
+
 // internal components
 require("./js/components/loading");
 require("./js/components/listing");
