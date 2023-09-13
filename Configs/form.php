@@ -39,12 +39,12 @@ return [
     'fields' => [
         'dateTime' => [
             'formatDates' => true,
-            'formatClient' => 'YYYY-MM-DD HH:mm:ss',
+            'formatClient' => 'DD-MM-YYYY HH:mm:ss',
             'formatServer' => 'YYYY-MM-DD HH:mm:ss',
         ],
         'date' => [
             'formatDates' => true,
-            'formatClient' => 'YYYY-MM-DD',
+            'formatClient' => 'DD-MM-YYYY',
             'formatServer' => 'YYYY-MM-DD',
         ]
     ],
