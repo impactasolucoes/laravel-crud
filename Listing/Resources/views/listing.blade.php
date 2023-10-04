@@ -78,7 +78,7 @@
                         </td>
 
                         @foreach ($columns as $column)
-                        <td>
+                        <td style="word-wrap: break-word !important; overflow-wrap: break-word !important; white-space: normal !important;">
                             <div class="d-flex px-3 py-1">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="mb-0 text-sm">{!! $column->formatData($item, $index, $data->items()) !!}</h6>
