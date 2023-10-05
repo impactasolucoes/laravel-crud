@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 use Impactasolucoes\Crud\Models\CrudEavConfigs;
 use Impactasolucoes\Crud\Models\CrudEavAttributes;
 use Impactasolucoes\Crud\Models\CrudEavValues;
+use Impactaweb\Breadcrumb\Breadcrumb;
+use Illuminate\Support\Str;
 use LogicException;
 use ReflectionMethod;
 
@@ -23,6 +25,7 @@ abstract class CrudController extends Controller
     public $request;
     public $id = 'id';
     public $crudName;
+    public $resourceBreadcrumb = [];
 
     abstract function formulario(array $dados): Form;
 
@@ -48,8 +51,74 @@ abstract class CrudController extends Controller
             throw new LogicException(get_class($this) . ' deve ter a propriedade $id');
         }
         $this->request = request();
+        $this->resourcesBreadcrumb();
     }
 
+    public function getBreadcrumb()
+    {
+        return $this->resourceBreadcrumb ?? [];
+    }
+    /**
+     * Monta o breadcrumb de acordo com o atributo $resourceBreadcrumb do controlador,
+     * se existir.
+     *
+     * @return void
+     */
+    public function resourcesBreadcrumb()
+    {
+        $baseBreadcrumb = $this->getBreadcrumb();
+        if (empty($baseBreadcrumb)) {
+            return;
+        }
+
+        $route = $this->request->route();
+        if (!$route) {
+            return;
+        }
+
+
+        # Monta os coringas dinamicos na rota ou no label do breadcrumb
+        # Ex: Concurso #{url.id_concurso} < Label e /admin/concursos/{url.id_concurso}/dashboard/ < Url
+        # Ele irá trocar os coringas {url.id_concurso} pelos parametros da rota
+        $parametros = $route->parameters;
+        foreach ($baseBreadcrumb as $ind => $breadCrumb) {
+            foreach ($parametros as $parametro => $valor) {
+                $nomeProcurar = '{url.' . $parametro . '}';
+
+                # Procura o Label
+                if (Str::contains($breadCrumb[0] ?? '', $nomeProcurar)) {
+                    $baseBreadcrumb[$ind][0] = str_replace($nomeProcurar, $valor, $breadCrumb[0]);
+                }
+
+                # Procura a "URL"
+                if (Str::contains($breadCrumb[1] ?? '', $nomeProcurar)) {
+                    $baseBreadcrumb[$ind][1] = str_replace($nomeProcurar, $valor, $breadCrumb[1]);
+                }
+            }
+        }
+
+        Breadcrumb::pushArray($baseBreadcrumb);
+
+        $routeActionMethod = $route->getActionMethod();
+        switch ($routeActionMethod) {
+            case 'index':
+                Breadcrumb::push('Listagem');
+                break;
+            case 'create':
+                Breadcrumb::push('Novo');
+                break;
+            case 'edit':
+                $params = $route->parameters();
+                $id = end($params);
+                Breadcrumb::push("Alterar #$id");
+                break;
+            case 'show':
+                $params = $route->parameters();
+                $id = end($params);
+                Breadcrumb::push("Visualizar #$id");
+                break;
+        }
+    }
 
     protected function camposPadrao($request)
     {
@@ -64,7 +133,7 @@ abstract class CrudController extends Controller
         CrudEavConfigs::where('crud_name', $this->crudName)->delete();
         foreach ($camposValidacao as $campo => $valida) {
 
-            if(!isset($request->all()[$campo])){
+            if (!isset($request->all()[$campo])) {
                 continue;
             }
 
@@ -77,7 +146,6 @@ abstract class CrudController extends Controller
             $conf = CrudEavConfigs::create(['crud_name' => $this->crudName, 'config_name' => $campo, 'config_value' => json_encode(['label' => $request->all()[$campo], 'ativo' => $ativo])]);
             $conf->save();
         }
-
     }
 
 
@@ -99,7 +167,6 @@ abstract class CrudController extends Controller
             $att = CrudEavAttributes::create(['crud_name' => $this->crudName, 'attribute_type' => $tipos[$c], 'attribute_label' => $campo, 'attribute_values' => $valores[$c]]);
             $att->save();
         }
-
     }
 
 
@@ -318,7 +385,7 @@ abstract class CrudController extends Controller
 
         switch ($action) {
 
-            # Salvar - Envia o usuário para o ID do crud submitado
+                # Salvar - Envia o usuário para o ID do crud submitado
             case 'save':
                 if (!$id) {
                     throw new Exception("ID not defined");
@@ -326,12 +393,12 @@ abstract class CrudController extends Controller
                 $redir = $this->redirecionaEditar($route, $id);
                 break;
 
-            # Salvar e Novo - Envia o usuário para a nova rota, mantendo o redir
+                # Salvar e Novo - Envia o usuário para a nova rota, mantendo o redir
             case 'save_create':
                 $redir = $this->redirecionaNovo($route);
                 break;
 
-            # Salvar e pŕoximo - Envia o usuário para o próximo ID no parâmetros 'ids'
+                # Salvar e pŕoximo - Envia o usuário para o próximo ID no parâmetros 'ids'
             case 'save_next':
                 if (!$id) {
                     throw new Exception("ID not defined");
@@ -339,13 +406,13 @@ abstract class CrudController extends Controller
                 $redir = $this->redirecionaProximo($id, $route);
                 break;
 
-            # Salvar e fechar - Volta para querystring na rota
-            # Caso a url não tenha querystring envia o usuário para a route selecionada
+                # Salvar e fechar - Volta para querystring na rota
+                # Caso a url não tenha querystring envia o usuário para a route selecionada
             case 'save_close':
                 $redir = $this->redirecionaQuerystring($route);
                 break;
 
-            # Envia o usuário para a route informada caso não seja as ações acima
+                # Envia o usuário para a route informada caso não seja as ações acima
             default:
                 $redir = $this->redirecionaRoute($route);
                 break;
