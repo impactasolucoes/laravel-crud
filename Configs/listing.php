@@ -20,19 +20,19 @@ return [
     'defaultActions' => [
         [
             'name' => 'create',
-            'label' => 'New',
+            'label' => 'Novo',
             'method' => 'GET',
             'icon' => 'far fa-plus-square'
         ],
         [
             'name' => 'edit',
-            'label' => 'Edit',
+            'label' => 'Editar',
             'method' => 'GET',
             'icon' => 'far fa-edit'
         ],
         [
             'name' => 'destroy',
-            'label' => 'Delete',
+            'label' => 'Deletar',
             'method' => 'DELETE',
             'icon' => 'far fa-trash-alt'
         ],
